@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Belajar Bahasa Arab - Hobi (الهوايات) | keterampilan membaca MTs Kelas 8</title>
+    <title>Belajar Bahasa Arab - Hobi (الهوايات) | MTs Kelas 8</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Segoe UI', 'Poppins', 'Tahoma', Geneva, Verdana, sans-serif;
             background-color: #fef9e6; /* krem */
-            color: #1e3a2f; /* hijau tua */
+            color: #1e3a2f;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* Warna Fresh: Hijau Tua #1e4a3a, Krem #fdf8ed, Aksen Biru #3b82f6 */
@@ -26,103 +26,150 @@
             --cream: #fdf8ed;
             --blue-accent: #3b82f6;
             --blue-hover: #2563eb;
-            --gray-light: #f0f2f5;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
 
-        /* Container Utama */
-        .container {
+        /* Container utama */
+        .app-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
         }
 
-        /* Navigasi Jump Link (Sticky) */
-        .nav-bar {
-            background: var(--green-dark);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 0.8rem 1rem;
-            border-radius: 0 0 24px 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        /* Setiap "page" disembunyikan default, tampil jika active */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--blue-accent);
+            margin-bottom: 1rem;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Halaman utama (home) dengan gaya khusus */
+        .home-page {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ea 100%);
+            border-top: 6px solid var(--green-dark);
+        }
+        .hero-title {
+            font-size: 2.4rem;
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #2c5f4a;
+            margin-bottom: 2rem;
+        }
+        .main-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .menu-card {
+            background: var(--cream);
+            border-radius: 28px;
+            padding: 1.2rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e0d6c0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+        }
+        .menu-card:hover {
+            transform: translateY(-6px);
+            background: white;
+            border-color: var(--blue-accent);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .menu-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .menu-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--green-dark);
+        }
+
+        /* Navigasi antar page (tombol kembali ke menu utama) */
+        .nav-control {
+            margin-top: 1.5rem;
             display: flex;
+            justify-content: space-between;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.6rem;
+            gap: 1rem;
+            border-top: 1px solid #e2e0d0;
+            padding-top: 1.5rem;
         }
-
-        .nav-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,240,0.5);
+        .btn-primary {
+            background: var(--blue-accent);
+            border: none;
             color: white;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
+            padding: 10px 24px;
             border-radius: 40px;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.9rem;
         }
-
-        .nav-btn:hover {
-            background: var(--blue-accent);
-            border-color: var(--blue-accent);
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: scale(1.02);
         }
-
-        /* Section Umum */
-        .section {
-            background: white;
-            border-radius: 32px;
-            padding: 1.8rem 2rem;
-            margin-bottom: 2.5rem;
-            box-shadow: var(--shadow);
-            transition: 0.2s;
-            border-top: 6px solid var(--blue-accent);
-        }
-
-        .section h2 {
+        .btn-secondary {
+            background: #e9e2ce;
             color: var(--green-dark);
-            border-left: 8px solid var(--blue-accent);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.7rem;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #d4cbb2;
         }
 
-        /* Kartu kosakata */
+        /* Komponen kosakata */
         .vocab-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
-
         .card-vocab {
             background: var(--cream);
             border-radius: 24px;
             padding: 1rem 1.2rem;
-            transition: 0.2s;
             cursor: pointer;
+            transition: 0.2s;
             border: 1px solid #e9e2ce;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
         }
-
         .card-vocab:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
             border-color: var(--blue-accent);
         }
-
         .arabic-word {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            font-family: 'Amiri', 'Traditional Arabic', 'Segoe UI', serif;
-            color: var(--green-dark);
+            font-family: 'Amiri', 'Traditional Arabic', serif;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
-
         .speaker-icon {
             background: var(--blue-accent);
             color: white;
@@ -132,57 +179,23 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
+            font-size: 1rem;
         }
-
         .speaker-icon:hover {
             background: var(--green-dark);
-            transform: scale(1.05);
         }
-
         .meaning {
             font-weight: bold;
-            color: #2c5f4a;
             margin: 8px 0 4px;
         }
-
         .example {
             font-style: italic;
             background: #eef2ea;
             padding: 6px 10px;
             border-radius: 16px;
-            font-size: 0.9rem;
-            margin-top: 8px;
+            font-size: 0.85rem;
         }
-
-        .arabic-example {
-            font-family: 'Amiri', serif;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        hr {
-            margin: 12px 0;
-            border-color: #ddd4c0;
-        }
-
-        /* Video container */
-        .video-wrapper {
-            background: #e9f0e5;
-            border-radius: 20px;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        iframe {
-            width: 100%;
-            max-width: 560px;
-            border-radius: 20px;
-            aspect-ratio: 16 / 9;
-        }
-
         /* Quiz */
         .quiz-question {
             background: #faf7ef;
@@ -190,38 +203,31 @@
             border-radius: 20px;
             margin-bottom: 1rem;
         }
-
         .options {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
             margin-top: 10px;
         }
-
         .opt-btn {
             background: white;
             border: 1px solid #cbd5e1;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 40px;
             cursor: pointer;
             transition: 0.1s;
-            font-weight: 500;
         }
-
-        .opt-btn:hover {
+        .opt-btn.selected-opt {
             background: var(--blue-accent);
             color: white;
             border-color: var(--blue-accent);
         }
-
         .feedback {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 8px;
-            padding-left: 10px;
         }
-
         .score-area {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: bold;
             background: var(--green-dark);
             color: white;
@@ -230,33 +236,27 @@
             border-radius: 60px;
             margin-top: 1rem;
         }
-
-        button {
-            background: var(--blue-accent);
-            border: none;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
+        .video-wrapper {
+            background: #e9f0e5;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
         }
-
-        button:hover {
-            background: var(--green-dark);
+        iframe {
+            width: 100%;
+            max-width: 560px;
+            border-radius: 20px;
+            aspect-ratio: 16/9;
         }
-
-        /* Profil dan Footer */
         .profile-card {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             gap: 20px;
             background: var(--cream);
             padding: 1.5rem;
             border-radius: 32px;
+            align-items: center;
         }
-
         .avatar {
             background: var(--green-dark);
             width: 80px;
@@ -268,268 +268,279 @@
             font-size: 2.2rem;
             color: white;
         }
-
-        .penutup {
-            text-align: center;
-            background: linear-gradient(135deg, #e0f0e5, #fef6e0);
+        h2 {
+            color: var(--green-dark);
+            border-left: 8px solid var(--blue-accent);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
         }
-
-        @media (max-width: 640px) {
-            .container {
-                padding: 0.8rem;
-            }
-            .section {
-                padding: 1.2rem;
-            }
-            .arabic-word {
-                font-size: 1.5rem;
-            }
-            .nav-btn {
-                padding: 0.3rem 0.7rem;
-                font-size: 0.75rem;
-            }
-        }
-
         footer {
             text-align: center;
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: #4b6b5c;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #5b6e5e;
+        }
+        @media (max-width: 640px) {
+            .app-container { padding: 1rem; }
+            .page { padding: 1.2rem; }
+            .hero-title { font-size: 1.8rem; }
+            .arabic-word { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
-
-<div class="nav-bar">
-    <button class="nav-btn" data-section="petunjuk">📘 Petunjuk</button>
-    <button class="nav-btn" data-section="prakata">📖 Prakata</button>
-    <button class="nav-btn" data-section="tujuan">🎯 Tujuan</button>
-    <button class="nav-btn" data-section="apersepsi">🎬 Apersepsi</button>
-    <button class="nav-btn" data-section="materi">📚 Materi</button>
-    <button class="nav-btn" data-section="evaluasi">📝 Evaluasi</button>
-    <button class="nav-btn" data-section="profil">👤 Profil</button>
-    <button class="nav-btn" data-section="penutup">💖 Penutup</button>
-</div>
-
-<div class="container">
-    <!-- PETUNJUK -->
-    <section id="petunjuk" class="section">
-        <h2>📘 Petunjuk Penggunaan</h2>
-        <ul style="margin-left: 1.5rem;">
-            <li>✔️ Navigasi: Klik tombol di atas untuk berpindah antar halaman.</li>
-            <li>🔊 Setiap kosakata hobi bisa diklik icon speaker 🎧 untuk mendengar pelafalan (Web Speech API).</li>
-            <li>📝 Pelajari materi kosakata + contoh kalimat.</li>
-            <li>📊 Kerjakan quiz evaluasi 10 soal pilihan ganda, dapatkan skor dan feedback langsung.</li>
-            <li>📱 Website responsif, bisa diakses lewat laptop maupun HP.</li>
-        </ul>
-    </section>
-
-    <!-- PRAKATA -->
-    <section id="prakata" class="section">
-        <h2>📖 Prakata</h2>
-        <p>Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat datang di platform belajar bahasa Arab interaktif "Maharatul Qira'ah: Hobi (الهوايات)". Website ini dirancang khusus untuk siswa MTs kelas 8 guna meningkatkan keterampilan membaca dan memperkaya kosakata seputar tema kegemaran. Semoga dengan belajar yang menyenangkan, kalian semakin cinta bahasa Arab!</p>
-    </section>
-
-    <!-- TUJUAN PEMBELAJARAN -->
-    <section id="tujuan" class="section">
-        <h2>🎯 Tujuan Pembelajaran</h2>
-        <ul style="list-style-type: circle; margin-left: 1.5rem;">
-            <li>1. Siswa dapat membaca dan mengartikan 11 kosakata hobi dalam bahasa Arab dengan benar.</li>
-            <li>2. Siswa mampu mengidentifikasi 8 fi'il (kata kerja) yang berkaitan dengan hobi.</li>
-            <li>3. Siswa dapat membuat contoh kalimat sederhana tentang hobi dalam bahasa Arab.</li>
-            <li>4. Siswa mampu menjawab soal evaluasi dengan tepat sebagai bukti pemahaman.</li>
-        </ul>
-    </section>
-
-    <!-- APERSEPSI: Video YouTube + pertanyaan pemantik -->
-    <section id="apersepsi" class="section">
-        <h2>🎬 Apersepsi (Ayo Saksikan!)</h2>
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/X0nXjI7py78?si=JcZ5CyuQNIRlqP4x" title="YouTube video tentang hobi dan Bahasa Arab" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p style="margin-top: 15px;"><strong>💬 Pertanyaan Pemantik:</strong> Apa hobimu dalam bahasa Arab? Tahukah kamu cara mengucapkan "Saya suka membaca" dalam bahasa Arab? Setelah menonton, coba sebutkan satu hobi favoritmu!</p>
+<div class="app-container">
+    <!-- Halaman Utama (Home) dengan judul dan main menu -->
+    <div id="homePage" class="page home-page active-page">
+        <div class="hero-title">📖 مَرْحَبًا</div>
+        <div class="hero-title" style="font-size:2rem;">Belajar Bahasa Arab</div>
+        <div class="hero-sub">Tema: الهوايات (Hobi) | MTs Kelas 8</div>
+        <p style="margin-bottom: 2rem;">🌿 Website interaktif untuk meningkatkan keterampilan membaca, kosakata, dan quiz seru!</p>
+        
+        <div class="main-menu-grid">
+            <div class="menu-card" data-page="petunjuk">
+                <div class="menu-icon">📘</div>
+                <div class="menu-title">Petunjuk</div>
+            </div>
+            <div class="menu-card" data-page="prakata">
+                <div class="menu-icon">📖</div>
+                <div class="menu-title">Prakata</div>
+            </div>
+            <div class="menu-card" data-page="tujuan">
+                <div class="menu-icon">🎯</div>
+                <div class="menu-title">Tujuan</div>
+            </div>
+            <div class="menu-card" data-page="apersepsi">
+                <div class="menu-icon">🎬</div>
+                <div class="menu-title">Apersepsi</div>
+            </div>
+            <div class="menu-card" data-page="materi">
+                <div class="menu-icon">📚</div>
+                <div class="menu-title">Materi</div>
+            </div>
+            <div class="menu-card" data-page="evaluasi">
+                <div class="menu-icon">📝</div>
+                <div class="menu-title">Evaluasi</div>
+            </div>
+            <div class="menu-card" data-page="profil">
+                <div class="menu-icon">👤</div>
+                <div class="menu-title">Profil</div>
+            </div>
+            <div class="menu-card" data-page="penutup">
+                <div class="menu-icon">💖</div>
+                <div class="menu-title">Penutup</div>
+            </div>
         </div>
-    </section>
+        <footer style="margin-top:1.5rem;">✨ Klik menu di atas untuk mulai belajar ✨</footer>
+    </div>
 
-    <!-- MATERI : kosakata hobi (minimal 11) + 8 fi'il -->
-    <section id="materi" class="section">
+    <!-- ===================== SEMUA HALAMAN KONTEN ===================== -->
+    <!-- Petunjuk -->
+    <div id="petunjukPage" class="page">
+        <h2>📘 Petunjuk Penggunaan</h2>
+        <ul style="margin-left:1.5rem;">
+            <li>🔹 Website ini terdiri dari beberapa halaman. Gunakan menu utama untuk navigasi.</li>
+            <li>🔹 Setiap kosakata hobi & fi'il dapat diklik icon 🔊 untuk mendengar pelafalan (Web Speech API).</li>
+            <li>🔹 Pelajari materi, lalu kerjakan quiz evaluasi 10 soal. Skor langsung muncul.</li>
+            <li>🔹 Desain responsif, cocok untuk laptop dan HP.</li>
+        </ul>
+        <div class="nav-control">
+            <button class="btn-secondary" onclick="goToHome()">🏠 Kembali ke Menu Utama</button>
+        </div>
+    </div>
+
+    <!-- Prakata -->
+    <div id="prakataPage" class="page">
+        <h2>📖 Prakata</h2>
+        <p>Assalamu'alaikum Warahmatullahi Wabarakatuh. Selamat datang di platform "Maharatul Qira'ah: Hobi (الهوايات)". Website ini dirancang untuk siswa MTs kelas 8 agar lebih mudah memahami kosa kata seputar kegemaran dalam bahasa Arab, dilengkapi dengan contoh kalimat, audio, dan kuis interaktif. Selamat belajar!</p>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
+
+    <!-- Tujuan -->
+    <div id="tujuanPage" class="page">
+        <h2>🎯 Tujuan Pembelajaran</h2>
+        <ul style="margin-left:1.5rem; list-style:circle;">
+            <li>1. Membaca dan mengartikan 11 kosakata hobi dalam bahasa Arab.</li>
+            <li>2. Mengenal 8 fi'il (kata kerja) yang berkaitan dengan tema hobi.</li>
+            <li>3. Membuat contoh kalimat sederhana tentang hobi.</li>
+            <li>4. Menjawab soal evaluasi dengan tepat (minimal skor 70).</li>
+        </ul>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
+
+    <!-- Apersepsi: video + pertanyaan -->
+    <div id="apersepsiPage" class="page">
+        <h2>🎬 Apersepsi</h2>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/X0nXjI7py78?si=JcZ5CyuQNIRlqP4x" title="Video pembelajaran hobi bahasa Arab" frameborder="0" allowfullscreen></iframe>
+            <p style="margin-top:15px;"><strong>💬 Pertanyaan Pemantik:</strong> Apa hobimu? Bagaimana mengucapkan "Saya suka berenang" dalam bahasa Arab? Setelah menonton, coba sebutkan 2 hobi favoritmu!</p>
+        </div>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
+
+    <!-- Materi: kosakata hobi + fi'il (11 + 8) -->
+    <div id="materiPage" class="page">
         <h2>📚 Materi Kosakata Hobi (الهوايات)</h2>
-        <p style="margin-bottom: 15px;"><strong>🔹 Klik pada ikon 🔈 untuk mendengar pengucapan setiap kata/fi'il.</strong></p>
-        <div class="vocab-grid" id="vocabGrid"></div>
+        <p><strong>🔊 Klik ikon suara untuk mendengar pengucapan</strong></p>
+        <div id="vocabGrid" class="vocab-grid"></div>
+        <h3 style="margin: 30px 0 10px;">🔹 Fi'il (Kata Kerja) untuk Hobi</h3>
+        <div id="verbGrid" class="vocab-grid"></div>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
 
-        <h3 style="margin: 30px 0 10px 0; color: var(--green-dark);">🔹 Fi'il (Kata Kerja) yang Sering Dipakai untuk Hobi</h3>
-        <div class="vocab-grid" id="verbGrid"></div>
-        <p style="margin-top: 18px; font-size: 0.9rem; background: #eef2ea; padding: 10px; border-radius: 20px;"><strong>📌 Contoh kalimat dalam materi:</strong> "أُحِبُّ القِرَاءَةَ" (Saya suka membaca), "هو يَلْعَبُ كُرَةَ الْقَدَمِ" (Dia bermain sepak bola).</p>
-    </section>
-
-    <!-- EVALUASI (Quiz interaktif 10 soal pilihan ganda) -->
-    <section id="evaluasi" class="section">
+    <!-- Evaluasi Quiz -->
+    <div id="evaluasiPage" class="page">
         <h2>📝 Evaluasi (Quiz Interaktif)</h2>
         <div id="quizContainer"></div>
-        <button id="submitQuiz">✅ Submit Jawaban</button>
+        <button id="submitQuiz" class="btn-primary" style="margin-top: 1rem;">✅ Submit Jawaban</button>
         <div id="quizScore" class="score-area" style="margin-top: 1rem;"></div>
-    </section>
+        <div class="nav-control" style="justify-content: flex-start; margin-top: 2rem;">
+            <button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button>
+        </div>
+    </div>
 
-    <!-- PROFIL PENGEMBANG -->
-    <section id="profil" class="section">
+    <!-- Profil Pengembang -->
+    <div id="profilPage" class="page">
         <h2>👩‍💻 Profil Pengembang</h2>
         <div class="profile-card">
             <div class="avatar">🇮🇩</div>
             <div>
                 <h3>Muhammad Faiz Al-Ashri</h3>
-                <p><strong>Peran:</strong> Pengembang Full-Stack & Desainer Pembelajaran</p>
-                <p><strong>Email (simulasi):</strong> faiz.arabic.education@example.com</p>
-                <p>Dedicated untuk menciptakan media belajar interaktif bahasa Arab yang menyenangkan bagi generasi muda.</p>
+                <p><strong>Peran:</strong> Pengembang & Desainer Edukasi</p>
+                <p><strong>Email (simulasi):</strong> faiz.arabic@example.com</p>
+                <p>Berdedikasi menciptakan media belajar interaktif dan menyenangkan untuk siswa MTs.</p>
             </div>
         </div>
-    </section>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
 
-    <!-- PENUTUP kata motivasi -->
-    <section id="penutup" class="section penutup">
+    <!-- Penutup Motivasi -->
+    <div id="penutupPage" class="page">
         <h2>💖 Penutup</h2>
-        <p style="font-size: 1.2rem;">"خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ" — Sebaik-baik manusia adalah yang bermanfaat bagi orang lain.</p>
-        <p style="margin-top: 15px;"><strong>✨ Teruslah belajar bahasa Arab, karena dengan bahasa Arab kita lebih memahami Al-Qur'an dan Hadits. Selamat berlatih dan jadilah generasi yang cakap berbahasa Arab! ✨</strong></p>
-    </section>
-    <footer>© 2025 - Platform Belajar Bahasa Arab MTs | Interaktif & Offline Ready</footer>
+        <div style="text-align: center; padding: 1rem;">
+            <p style="font-size:1.3rem;">"مَنْ جَدَّ وَجَدَ" — Barang siapa bersungguh-sungguh, maka ia akan berhasil.</p>
+            <p style="margin-top: 20px;">✨ Teruslah belajar bahasa Arab, karena dengan bahasa Arab kita lebih dekat dengan Al-Qur'an. Selamat berlatih, semoga menjadi generasi yang cakap berbahasa Arab! ✨</p>
+        </div>
+        <div class="nav-control"><button class="btn-secondary" onclick="goToHome()">🏠 Menu Utama</button></div>
+    </div>
+    <footer style="text-align: center; margin-top: 0.5rem;">© 2025 - Platform Belajar Interaktif | Offline & GitHub Pages Ready</footer>
 </div>
 
 <script>
-    // ======================= DATA MATERI (11 Hobi + 8 Fi'il) =======================
+    // ---------- DATA MATERI (11 hobi + 8 fi'il) ----------
     const hobbies = [
         { arab: "القِرَاءَة", arti: "Membaca", contoh: "أُحِبُّ القِرَاءَةَ فِي الْمَكْتَبَةِ", artiContoh: "Saya suka membaca di perpustakaan" },
-        { arab: "الرَّسْمُ", arti: "Menggambar", contoh: "هِيَ تَرْسُمُ مَنْظَرًا طَبِيعِيًّا", artiContoh: "Dia (perempuan) menggambar pemandangan alam" },
-        { arab: "السِّبَاحَة", arti: "Berenang", contoh: "نَحْنُ نَسْبَحُ فِي الْمَسْبَحِ", artiContoh: "Kami berenang di kolam renang" },
+        { arab: "الرَّسْمُ", arti: "Menggambar", contoh: "هِيَ تَرْسُمُ مَنْظَرًا", artiContoh: "Dia (pr) menggambar pemandangan" },
+        { arab: "السِّبَاحَة", arti: "Berenang", contoh: "نَحْنُ نَسْبَحُ فِي الْمَسْبَحِ", artiContoh: "Kami berenang di kolam" },
         { arab: "كُرَةُ الْقَدَم", arti: "Sepak Bola", contoh: "هُوَ يَلْعَبُ كُرَةَ الْقَدَمِ", artiContoh: "Dia bermain sepak bola" },
-        { arab: "رُكُوبُ الدَّرَّاجَة", arti: "Bersepeda", contoh: "أَنَا أَرْكَبُ الدَّرَّاجَةَ يَوْمَ الْجُمُعَةِ", artiContoh: "Saya bersepeda pada hari Jumat" },
-        { arab: "السَّفَرُ", arti: "Bepergian / Traveling", contoh: "نُحِبُّ السَّفَرَ إِلَى الْبِلادِ الْجَدِيدَةِ", artiContoh: "Kami suka bepergian ke negeri baru" },
-        { arab: "التَّصْوِيرُ", arti: "Fotografi", contoh: "هُوَ مُصَوِّرٌ مَاهِرٌ", artiContoh: "Dia fotografer yang handal" },
-        { arab: "الطَّبْخُ", arti: "Memasak", contoh: "أُمِّي تَطْبُخُ طَعَامًا لَذِيذًا", artiContoh: "Ibuku memasak makanan lezat" },
+        { arab: "رُكُوبُ الدَّرَّاجَة", arti: "Bersepeda", contoh: "أَنَا أَرْكَبُ الدَّرَّاجَةَ", artiContoh: "Saya bersepeda" },
+        { arab: "السَّفَرُ", arti: "Bepergian", contoh: "نُحِبُّ السَّفَرَ", artiContoh: "Kami suka bepergian" },
+        { arab: "التَّصْوِيرُ", arti: "Fotografi", contoh: "هُوَ مُصَوِّرٌ مَاهِرٌ", artiContoh: "Dia fotografer handal" },
+        { arab: "الطَّبْخُ", arti: "Memasak", contoh: "أُمِّي تَطْبُخُ طَعَامًا", artiContoh: "Ibuku memasak makanan" },
         { arab: "الرِّيَاضَة", arti: "Olahraga", contoh: "الرِّيَاضَةُ تَقْوِي الْجِسْمَ", artiContoh: "Olahraga menguatkan badan" },
-        { arab: "الْمُشَاهَدَةُ (الأَفْلَام)", arti: "Menonton film", contoh: "نَشَاهِدُ فِيلْمًا مُمْتِعًا", artiContoh: "Kami menonton film yang seru" },
-        { arab: "لَعْبُ الشِّطْرَنْج", arti: "Bermain catur", contoh: "الْأَبُ يَلْعَبُ الشِّطْرَنْجَ مَعَ الْوَلَدِ", artiContoh: "Ayah bermain catur dengan anak" }
+        { arab: "الْمُشَاهَدَة", arti: "Menonton film", contoh: "نَشَاهِدُ فِيلْمًا", artiContoh: "Kami menonton film" },
+        { arab: "لَعْبُ الشِّطْرَنْج", arti: "Bermain catur", contoh: "الْأَبُ يَلْعَبُ الشِّطْرَنْجَ", artiContoh: "Ayah bermain catur" }
     ];
-
     const verbs = [
         { arab: "أُحِبُّ", arti: "Saya suka", contoh: "أُحِبُّ القِرَاءَةَ", artiContoh: "Saya suka membaca" },
-        { arab: "يَلْعَبُ", arti: "Dia (lk) bermain", contoh: "يَلْعَبُ كُرَةَ السَّلَّةِ", artiContoh: "Dia bermain basket" },
+        { arab: "يَلْعَبُ", arti: "Dia (lk) bermain", contoh: "يَلْعَبُ كُرَةَ الْقَدَمِ", artiContoh: "Dia bermain sepak bola" },
         { arab: "تَلْعَبُ", arti: "Dia (pr) bermain", contoh: "تَلْعَبُ بِالْكُرَةِ", artiContoh: "Dia (pr) bermain bola" },
         { arab: "أَرْكَبُ", arti: "Saya mengendarai", contoh: "أَرْكَبُ الدَّرَّاجَةَ", artiContoh: "Saya mengendarai sepeda" },
         { arab: "أَسْبَحُ", arti: "Saya berenang", contoh: "أَسْبَحُ فِي الْبَحْرِ", artiContoh: "Saya berenang di laut" },
-        { arab: "أَرْسُمُ", arti: "Saya menggambar", contoh: "أَرْسُمُ صُورَةً", artiContoh: "Saya menggambar sebuah gambar" },
-        { arab: "أُصَوِّرُ", arti: "Saya memotret", contoh: "أُصَوِّرُ الْغُرُوبَ", artiContoh: "Saya memotret matahari terbenam" },
+        { arab: "أَرْسُمُ", arti: "Saya menggambar", contoh: "أَرْسُمُ صُورَةً", artiContoh: "Saya menggambar gambar" },
+        { arab: "أُصَوِّرُ", arti: "Saya memotret", contoh: "أُصَوِّرُ الْغُرُوبَ", artiContoh: "Saya memotret sunset" },
         { arab: "أَطْبُخُ", arti: "Saya memasak", contoh: "أَطْبُخُ الْأَرُزَّ", artiContoh: "Saya memasak nasi" }
     ];
 
-    // Web Speech API function
-    function speakText(text, lang = 'ar') {
-        if (!window.speechSynthesis) {
-            alert("Maaf, browser Anda tidak mendukung Web Speech API.");
-            return;
-        }
+    // Web Speech
+    function speakText(text, lang='ar') {
+        if(!window.speechSynthesis) { alert("Browser tidak mendukung Speech API"); return; }
+        window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
         utterance.rate = 0.9;
-        window.speechSynthesis.cancel(); // mencegah antrean berlebih
         window.speechSynthesis.speak(utterance);
     }
 
-    // Render Grid Hobi
     function renderVocab() {
         const grid = document.getElementById('vocabGrid');
+        if(!grid) return;
         grid.innerHTML = '';
-        hobbies.forEach(item => {
+        hobbies.forEach(h => {
             const card = document.createElement('div');
             card.className = 'card-vocab';
             card.innerHTML = `
                 <div class="arabic-word">
-                    <span>${item.arab}</span>
-                    <span class="speaker-icon" data-arabic="${item.arab}">🔊</span>
+                    <span>${h.arab}</span>
+                    <span class="speaker-icon" data-arabic="${h.arab}">🔊</span>
                 </div>
-                <div class="meaning">📖 ${item.arti}</div>
-                <div class="example">
-                    <span class="arabic-example">${item.contoh}</span><br>
-                    <span style="font-size:0.8rem;">✨ ${item.artiContoh}</span>
-                </div>
+                <div class="meaning">📖 ${h.arti}</div>
+                <div class="example">📌 ${h.contoh}<br><span style="font-size:0.75rem;">${h.artiContoh}</span></div>
             `;
-            const speaker = card.querySelector('.speaker-icon');
-            speaker.addEventListener('click', (e) => {
-                e.stopPropagation();
-                speakText(item.arab, 'ar');
+            card.querySelector('.speaker-icon').addEventListener('click', (e) => {
+                e.stopPropagation(); speakText(h.arab, 'ar');
             });
             grid.appendChild(card);
         });
     }
-
     function renderVerbs() {
-        const verbGrid = document.getElementById('verbGrid');
-        verbGrid.innerHTML = '';
-        verbs.forEach(verb => {
+        const vGrid = document.getElementById('verbGrid');
+        if(!vGrid) return;
+        vGrid.innerHTML = '';
+        verbs.forEach(v => {
             const card = document.createElement('div');
             card.className = 'card-vocab';
             card.innerHTML = `
                 <div class="arabic-word">
-                    <span>${verb.arab}</span>
-                    <span class="speaker-icon" data-arabic="${verb.arab}">🔊</span>
+                    <span>${v.arab}</span>
+                    <span class="speaker-icon" data-arabic="${v.arab}">🔊</span>
                 </div>
-                <div class="meaning">🔹 ${verb.arti}</div>
-                <div class="example">📌 ${verb.contoh} — ${verb.artiContoh}</div>
+                <div class="meaning">⚡ ${v.arti}</div>
+                <div class="example">${v.contoh} — ${v.artiContoh}</div>
             `;
-            const speaker = card.querySelector('.speaker-icon');
-            speaker.addEventListener('click', (e) => {
-                e.stopPropagation();
-                speakText(verb.arab, 'ar');
-            });
-            verbGrid.appendChild(card);
+            card.querySelector('.speaker-icon').addEventListener('click', () => speakText(v.arab,'ar'));
+            vGrid.appendChild(card);
         });
     }
 
-    // ================= QUIZ : 10 SOAL PILIHAN GANDA ===================
+    // QUIZ (10 soal)
     const quizQuestions = [
         { question: "Apa arti dari kata 'القِرَاءَة' ?", options: ["Menulis", "Membaca", "Bermain", "Berenang"], correct: 1 },
-        { question: "Bagaimana cara mengatakan 'Saya suka sepak bola' dalam bahasa Arab?", options: ["أُحِبُّ السِّبَاحَة", "أُحِبُّ الرَّسْم", "أُحِبُّ كُرَةَ الْقَدَم", "أَرْكَبُ الدَّرَّاجَة"], correct: 2 },
+        { question: "Bagaimana mengatakan 'Saya suka sepak bola' dalam bahasa Arab?", options: ["أُحِبُّ السِّبَاحَة", "أُحِبُّ الرَّسْم", "أُحِبُّ كُرَةَ الْقَدَم", "أَرْكَبُ الدَّرَّاجَة"], correct: 2 },
         { question: "Fi'il yang artinya 'Saya menggambar' adalah...", options: ["أَرْسُمُ", "أَطْبُخُ", "أُصَوِّرُ", "أَسْبَحُ"], correct: 0 },
-        { question: "Kata 'رُكُوبُ الدَّرَّاجَة' memiliki arti?", options: ["Berselancar", "Bersepeda", "Berkuda", "Bermain game"], correct: 1 },
-        { question: "Manakah yang merupakan arti dari 'السَّفَرُ'?", options: ["Membaca", "Berenang", "Bepergian", "Memasak"], correct: 2 },
-        { question: "Contoh kalimat: 'هُوَ يَلْعَبُ كُرَةَ الْقَدَمِ' artinya?", options: ["Dia bermain bola basket", "Dia bermain sepak bola", "Dia berlari", "Dia bersepeda"], correct: 1 },
-        { question: "Arti kata kerja 'أُصَوِّرُ' dalam konteks hobi adalah?", options: ["Saya memasak", "Saya memotret", "Saya membaca", "Saya menulis"], correct: 1 },
-        { question: "Hobi 'الطَّبْخُ' dalam bahasa Indonesia berarti?", options: ["Memasak", "Menyanyi", "Menari", "Melukis"], correct: 0 },
-        { question: "Kata 'نَحْنُ نَسْبَحُ' berarti?", options: ["Kami berenang", "Kami bermain", "Kami membaca", "Kami menggambar"], correct: 0 },
-        { question: "Apa yang dimaksud dengan 'لَعْبُ الشِّطْرَنْج'?", options: ["Bermain catur", "Bermain bola", "Bermain game online", "Bermain musik"], correct: 0 }
+        { question: "Kata 'رُكُوبُ الدَّرَّاجَة' artinya?", options: ["Berselancar", "Bersepeda", "Berkuda", "Bermain game"], correct: 1 },
+        { question: "Manakah arti dari 'السَّفَرُ'?", options: ["Membaca", "Berenang", "Bepergian", "Memasak"], correct: 2 },
+        { question: "Kalimat 'هُوَ يَلْعَبُ كُرَةَ الْقَدَمِ' artinya?", options: ["Dia bermain basket", "Dia bermain sepak bola", "Dia berlari", "Dia bersepeda"], correct: 1 },
+        { question: "Arti 'أُصَوِّرُ' dalam konteks hobi?", options: ["Saya memasak", "Saya memotret", "Saya membaca", "Saya menulis"], correct: 1 },
+        { question: "Hobi 'الطَّبْخُ' berarti?", options: ["Memasak", "Menyanyi", "Menari", "Melukis"], correct: 0 },
+        { question: "Kata 'نَحْنُ نَسْبَحُ' artinya?", options: ["Kami berenang", "Kami bermain", "Kami membaca", "Kami menggambar"], correct: 0 },
+        { question: "Apa arti 'لَعْبُ الشِّطْرَنْج'?", options: ["Bermain catur", "Bermain bola", "Bermain game", "Bermain musik"], correct: 0 }
     ];
-
     let userAnswers = new Array(10).fill(null);
 
     function renderQuiz() {
         const container = document.getElementById('quizContainer');
+        if(!container) return;
         container.innerHTML = '';
         quizQuestions.forEach((q, idx) => {
             const qDiv = document.createElement('div');
             qDiv.className = 'quiz-question';
-            qDiv.innerHTML = `
-                <p><strong>${idx+1}. ${q.question}</strong></p>
-                <div class="options" data-qidx="${idx}"></div>
-                <div class="feedback" id="fb-${idx}"></div>
-            `;
+            qDiv.innerHTML = `<p><strong>${idx+1}. ${q.question}</strong></p><div class="options" data-qidx="${idx}"></div><div class="feedback" id="fb-${idx}"></div>`;
             const optsDiv = qDiv.querySelector('.options');
             q.options.forEach((opt, optIdx) => {
                 const btn = document.createElement('button');
                 btn.textContent = opt;
                 btn.classList.add('opt-btn');
                 btn.dataset.optIndex = optIdx;
-                btn.addEventListener('click', (e) => {
-                    // update jawaban user
+                btn.addEventListener('click', () => {
                     userAnswers[idx] = optIdx;
-                    // update style semua tombol di pertanyaan ini
                     const allBtns = optsDiv.querySelectorAll('.opt-btn');
-                    allBtns.forEach(btnEl => {
-                        btnEl.style.background = 'white';
-                        btnEl.style.color = '#1e3a2f';
-                        btnEl.style.border = '1px solid #cbd5e1';
-                    });
+                    allBtns.forEach(b => { b.classList.remove('selected-opt'); b.style.background='white'; b.style.color='#1e3a2f';});
+                    btn.classList.add('selected-opt');
                     btn.style.background = 'var(--blue-accent)';
                     btn.style.color = 'white';
-                    btn.style.borderColor = 'var(--blue-accent)';
-                    const feedbackDiv = qDiv.querySelector(`.feedback`);
-                    feedbackDiv.innerHTML = `✅ Jawaban tersimpan: ${opt}`;
+                    const fbDiv = document.getElementById(`fb-${idx}`);
+                    if(fbDiv) fbDiv.innerHTML = `✅ Jawaban tersimpan: ${opt}`;
                 });
                 optsDiv.appendChild(btn);
             });
@@ -539,76 +550,61 @@
 
     function evaluateQuiz() {
         let score = 0;
-        for (let i = 0; i < quizQuestions.length; i++) {
+        for(let i=0; i<quizQuestions.length; i++) {
             const fbDiv = document.getElementById(`fb-${i}`);
-            if (userAnswers[i] === null) {
-                if(fbDiv) fbDiv.innerHTML = "⚠️ Belum dijawab!";
-                continue;
-            }
+            if(userAnswers[i] === null) { if(fbDiv) fbDiv.innerHTML = "⚠️ Belum dijawab!"; continue; }
             const isCorrect = (userAnswers[i] === quizQuestions[i].correct);
-            if (isCorrect) {
-                score++;
-                if(fbDiv) fbDiv.innerHTML = "✅ Jawaban Benar!";
-            } else {
-                const correctAnsText = quizQuestions[i].options[quizQuestions[i].correct];
-                if(fbDiv) fbDiv.innerHTML = `❌ Salah. Jawaban benar: ${correctAnsText}`;
-            }
+            if(isCorrect) { score++; if(fbDiv) fbDiv.innerHTML = "✅ Benar!"; }
+            else { const correctAns = quizQuestions[i].options[quizQuestions[i].correct]; if(fbDiv) fbDiv.innerHTML = `❌ Salah. Jawaban benar: ${correctAns}`; }
         }
         const scoreDiv = document.getElementById('quizScore');
-        scoreDiv.innerHTML = `🎉 Skor Anda: ${score} / ${quizQuestions.length} 🎉`;
-        if(score === 10) scoreDiv.style.background = "#1e4a3a";
-        else if(score >= 7) scoreDiv.style.background = "#2d6a4f";
+        scoreDiv.innerHTML = `🎉 Skor: ${score} / ${quizQuestions.length} 🎉`;
+        if(score===10) scoreDiv.style.background = "#1e4a3a";
+        else if(score>=7) scoreDiv.style.background = "#2d6a4f";
         else scoreDiv.style.background = "#b45353";
-        window.scrollTo({ top: document.getElementById('evaluasi').offsetTop - 80, behavior: 'smooth' });
     }
 
-    // =============== NAVIGASI JUMP LINK (Button) ==================
-    function setupNavigation() {
-        const buttons = document.querySelectorAll('.nav-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const sectionId = btn.getAttribute('data-section');
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    const offset = 70;
-                    const elementPosition = targetSection.offsetTop - offset;
-                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
-                }
+    // PAGE NAVIGATION (tanpa scrolling, setiap page independen)
+    function showPage(pageId) {
+        // sembunyikan semua page
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+        const target = document.getElementById(pageId);
+        if(target) target.classList.add('active-page');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        // Re-render konten dinamis jika diperlukan (hanya sekali)
+        if(pageId === 'materiPage') {
+            if(document.getElementById('vocabGrid').innerHTML === '') { renderVocab(); renderVerbs(); }
+        }
+        if(pageId === 'evaluasiPage') {
+            if(document.getElementById('quizContainer').innerHTML === '') renderQuiz();
+        }
+    }
+
+    function goToHome() {
+        showPage('homePage');
+    }
+
+    // Event listener untuk menu utama (home)
+    function bindMenuEvents() {
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const pageName = card.getAttribute('data-page');
+                if(pageName) showPage(pageName + 'Page');
             });
         });
     }
 
-    // Optional: tambahkan klik pada speaker untuk semua .speaker-icon yang muncul setelah dynamic render
-    function attachGlobalSpeaker() {
-        // sudah dilakukan per item saat render, tapi untuk dinamis kita amankan juga
-        document.querySelectorAll('.speaker-icon').forEach(icon => {
-            if(!icon.hasListener) {
-                const arabicText = icon.getAttribute('data-arabic');
-                if(arabicText) {
-                    icon.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        speakText(arabicText, 'ar');
-                    });
-                    icon.hasListener = true;
-                }
-            }
-        });
-    }
-
-    // init all
+    // inisialisasi tambahan
     function init() {
+        bindMenuEvents();
+        // Preload materi kosong
         renderVocab();
         renderVerbs();
         renderQuiz();
-        setupNavigation();
-        // memastikan setiap icon yang sudah ada diberi event (setelah render tambahan)
-        setTimeout(() => {
-            attachGlobalSpeaker();
-        }, 100);
-        // Submit quiz listener
-        document.getElementById('submitQuiz').addEventListener('click', evaluateQuiz);
+        document.getElementById('submitQuiz')?.addEventListener('click', evaluateQuiz);
+        // pastikan home page aktif saat load
+        showPage('homePage');
     }
-
     init();
 </script>
 </body>
